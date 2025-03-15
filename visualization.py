@@ -7,21 +7,35 @@ class ImageVisualizer:
     """Handles image visualization and saving."""
 
     @staticmethod
+    # def overlay_seams(image: np.ndarray, seams: list[np.ndarray]) -> np.ndarray:
+    #     """
+    #     Overlay all seams on the original image.
+
+    #     :param image: The original image.
+    #     :param seams: List of seams (each seam is an array of indices).
+    #     :return: Image with all seams drawn.
+    #     """
+    #     img_with_seams = image.copy()
+
+    #     for seam in seams:
+    #         for row, col in enumerate(seam):
+    #             img_with_seams[row, col] = [255, 0, 0]  # Draw seams
+
+    #     return img_with_seams
+    @staticmethod
     def overlay_seams(image: np.ndarray, seams: list[np.ndarray]) -> np.ndarray:
         """
         Overlay all seams on the original image.
-
-        :param image: The original image.
-        :param seams: List of seams (each seam is an array of indices).
-        :return: Image with all seams drawn.
         """
         img_with_seams = image.copy()
 
         for seam in seams:
-            for row, col in enumerate(seam):
-                img_with_seams[row, col] = [255, 0, 0]  # Draw seams in RED
+            for row, col in enumerate(seam):  # Ensure seam[row] correctly maps to col
+                if 0 <= col < img_with_seams.shape[1]:  # Prevent out-of-bounds errors
+                    img_with_seams[row, col] = [255, 0, 0]  # Draw seams in red
 
         return img_with_seams
+
 
     @staticmethod
     def save_results(original: np.ndarray, seams: list[np.ndarray], resized: np.ndarray, output_dir: str, filename: str) -> None:
@@ -51,26 +65,52 @@ class ImageVisualizer:
         print(f"Results saved to {output_dir}")
 
     @staticmethod
+    # def show_images(original: np.ndarray, seams: list[np.ndarray], resized: np.ndarray) -> None:
+    #     """
+    #     Display original image with seams and the final resized image.
+
+    #     :param original: Original image.
+    #     :param seams: List of seams.
+    #     :param resized: Final resized image.
+    #     """
+    #     img_with_seams = ImageVisualizer.overlay_seams(original, seams)
+
+    #     plt.figure(figsize=(15, 5))
+        
+    #     plt.subplot(1, 2, 1)
+    #     plt.title("Seams to be Removed")
+    #     plt.imshow(img_with_seams)
+    #     plt.axis("off")
+
+    #     plt.subplot(1, 2, 2)
+    #     plt.title("Final Resized Image")
+    #     plt.imshow(resized)
+    #     plt.axis("off")
+
+    #     plt.show()
+    @staticmethod
     def show_images(original: np.ndarray, seams: list[np.ndarray], resized: np.ndarray) -> None:
         """
         Display original image with seams and the final resized image.
-
-        :param original: Original image.
-        :param seams: List of seams.
-        :param resized: Final resized image.
         """
         img_with_seams = ImageVisualizer.overlay_seams(original, seams)
 
         plt.figure(figsize=(15, 5))
         
-        plt.subplot(1, 2, 1)
-        plt.title("Seams to be Removed")
+        plt.subplot(1, 3, 1)
+        plt.title("Original Image")
+        plt.imshow(original)
+        plt.axis("off")
+
+        plt.subplot(1, 3, 2)
+        plt.title("Seam Overlay")
         plt.imshow(img_with_seams)
         plt.axis("off")
 
-        plt.subplot(1, 2, 2)
+        plt.subplot(1, 3, 3)
         plt.title("Final Resized Image")
         plt.imshow(resized)
         plt.axis("off")
 
         plt.show()
+
