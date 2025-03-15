@@ -1,23 +1,21 @@
 import numpy as np
+import numba
 
 
 class SeamFinder:
     """Finds minimum energy seams."""
 
-    @staticmethod
+    @numba.njit(parallel=True)
     def calculate_cumulative_energy_map(energy: np.ndarray) -> np.ndarray:
         """
-        Compute the cumulative energy map for vertical seam removal.
-
-        :param energy: Energy matrix of the image.
-        :return: Cumulative energy map.
+        Compute the cumulative energy map using parallel computation.
         """
         height, width = energy.shape
         cumulative_energy = np.zeros_like(energy, dtype=np.float64)
 
         cumulative_energy[0, :] = energy[0, :]
 
-        for i in range(1, height):
+        for i in numba.prange(1, height):  # Parallel loop
             for j in range(width):
                 if j == 0:
                     cumulative_energy[i, j] = energy[i, j] + min(
