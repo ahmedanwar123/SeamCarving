@@ -3,9 +3,9 @@
 Seam carving is an image processing technique that resizes images while preserving important content. This project implements seam carving using energy-based seam removal.
 
 ## **Steps**
-1. **Compute Energy Map** – Identify important regions in the image using a gradient-based energy function.
+1. **Compute Energy Map** – Identify important regions (energy map) in the image using a gradient-based energy function.
 2. **Find Optimal Seams** – Use **dynamic programming** to find the least important vertical/horizontal seams.
-3. **Remove/Insert Seams** – Remove seams for shrinking or duplicate them for expansion.
+3. **Remove Seams** – Remove seams for resizing image.
 4. **Visualize Seams** – Display the removed seams on the original image.
 5. **Generate Final Resized Image** – Output the transformed image.
 
