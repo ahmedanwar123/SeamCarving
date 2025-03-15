@@ -40,11 +40,9 @@ _This is the output after seam carving._
 
 ### `remove_seam(seam)`
 - Removes the **selected seam** from the image, reducing its width.
-- Core function for **content-aware resizing**.
-
 ### `get_seam_visualization()`
 - Draws seams on the original image for better **understanding**.
-- Typically visualized in **red** to indicate removable pixels.
+- Visualized in **red** to indicate removable pixels.
 
 ---
 
