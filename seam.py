@@ -20,12 +20,19 @@ class SeamFinder:
         for i in range(1, height):
             for j in range(width):
                 if j == 0:
-                    cumulative_energy[i, j] = energy[i, j] + min(cumulative_energy[i-1, j], cumulative_energy[i-1, j+1])
+                    cumulative_energy[i, j] = energy[i, j] + min(
+                        cumulative_energy[i - 1, j], cumulative_energy[i - 1, j + 1]
+                    )
                 elif j == width - 1:
-                    cumulative_energy[i, j] = energy[i, j] + min(cumulative_energy[i-1, j-1], cumulative_energy[i-1, j])
+                    cumulative_energy[i, j] = energy[i, j] + min(
+                        cumulative_energy[i - 1, j - 1], cumulative_energy[i - 1, j]
+                    )
                 else:
                     cumulative_energy[i, j] = energy[i, j] + min(
-                        cumulative_energy[i-1, j-1], cumulative_energy[i-1, j], cumulative_energy[i-1, j+1])
+                        cumulative_energy[i - 1, j - 1],
+                        cumulative_energy[i - 1, j],
+                        cumulative_energy[i - 1, j + 1],
+                    )
 
         return cumulative_energy
 
@@ -45,10 +52,26 @@ class SeamFinder:
         for i in range(height - 2, -1, -1):
             j = seam[i + 1]
             if j == 0:
-                seam[i] = j + np.argmin([cumulative_energy[i, j], cumulative_energy[i, j + 1]])
+                seam[i] = j + np.argmin(
+                    [cumulative_energy[i, j], cumulative_energy[i, j + 1]]
+                )
             elif j == width - 1:
-                seam[i] = j - 1 + np.argmin([cumulative_energy[i, j - 1], cumulative_energy[i, j]])
+                seam[i] = (
+                    j
+                    - 1
+                    + np.argmin([cumulative_energy[i, j - 1], cumulative_energy[i, j]])
+                )
             else:
-                seam[i] = j - 1 + np.argmin([cumulative_energy[i, j - 1], cumulative_energy[i, j], cumulative_energy[i, j + 1]])
+                seam[i] = (
+                    j
+                    - 1
+                    + np.argmin(
+                        [
+                            cumulative_energy[i, j - 1],
+                            cumulative_energy[i, j],
+                            cumulative_energy[i, j + 1],
+                        ]
+                    )
+                )
 
         return seam
