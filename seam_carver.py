@@ -17,7 +17,7 @@ class SeamCarver:
         height, width = self.img.shape[:2]
         output = np.zeros((height, width - 1, 3), dtype=self.img.dtype)
 
-        seam_indices = []  # Store entire seam for correct visualization
+        seam_indices = []  # Store entire seam for visualization
 
         for i in range(height):
             seam_indices.append(seam[i])  # Store seam column index per row
