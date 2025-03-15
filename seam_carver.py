@@ -12,16 +12,6 @@ class SeamCarver:
         self.seams = []  # Store all seam coordinates
         self.seam_visualizations = []  # Store images with seams
 
-    # def remove_seam(self, seam: np.ndarray) -> None:
-    #     """Removes a seam and stores its path for visualization later."""
-    #     height, width = self.img.shape[:2]
-    #     output = np.zeros((height, width - 1, 3), dtype=self.img.dtype)
-
-    #     for i in range(height):
-    #         self.seams.append((i, seam[i]))  # Store seam coordinates
-    #         output[i, :, :] = np.delete(self.img[i, :, :], seam[i], axis=0)
-
-    #     self.img = output  # Update the image after removing the seam
     def remove_seam(self, seam: np.ndarray) -> None:
         """Removes a seam and stores its path for visualization later."""
         height, width = self.img.shape[:2]
