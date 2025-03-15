@@ -15,7 +15,7 @@ Seam carving is an image processing technique that resizes images while preservi
 ## Example Results
 
 ### **Original Image**
-![Original](images/cat.jpg)
+![Original](images/cat.png)
 
 ### **Seams Visualization**
 _This image shows the seams that will be removed._
