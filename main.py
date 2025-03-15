@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 from seam_carver import SeamCarver
 
 

@@ -1,5 +1,4 @@
 import numpy as np
-import cv2
 from energy import EnergyCalculator
 from seam import SeamFinder
 
