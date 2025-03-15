@@ -1,4 +1,5 @@
 import cv2
+import time
 from seam_carver import SeamCarver
 
 
@@ -15,6 +16,8 @@ def main():
 
     carver = SeamCarver(img_rgb)
 
+    start_time = time.time()  # Start timing
+
     if option == 1:
         target_width = int(input("Enter target width: "))
         resized_img = carver.carve_width(target_width)
@@ -26,6 +29,9 @@ def main():
         target_height = int(input("Enter target height: "))
         resized_img = carver.carve_both(target_width, target_height)
 
+    end_time = time.time()  # End timing
+    elapsed_time = end_time - start_time  # Compute elapsed time
+
     # Get seam visualization
     seam_visualization = carver.get_seam_visualization()
 
@@ -34,7 +40,8 @@ def main():
     cv2.imwrite("resized_result.jpg", cv2.cvtColor(resized_img, cv2.COLOR_RGB2BGR))
 
     print("Seam visualization saved as seams_visual.jpg")
-    print("Final resized image saved as resized.jpg")
+    print("Final resized image saved as resized_result.jpg")
+    print(f"Seam carving completed in {elapsed_time:.4f} seconds.")  # Output time
 
 
 if __name__ == "__main__":
